@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khởi động: Khu Vườn Kỳ Diệu (Ghép đôi = 10)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 12px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      margin-bottom: 15px;
+    }
+    h1 { color: #2e7d32; font-size: 26px; margin-bottom: 4px; }
+    p.guide { color: #555; font-size: 16px; font-weight: 500; }
+
+    .game-board {
+      display: flex;
+      width: 100%;
+      max-width: 950px;
+      gap: 30px;
+      justify-content: center;
+      align-items: stretch;
+      flex-grow: 1;
+    }
+    .column {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .column-title {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      padding-bottom: 8px;
+      border-bottom: 2px dashed #bbb;
+    }
+    .bunnies-col .column-title { color: #d81b60; }
+    .carrots-col .column-title { color: #e65100; }
+
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 3px solid transparent;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+    .card.selected { border-color: #ffb300; background: #fffde7; transform: scale(1.03); }
+    .card.matched {
+      opacity: 0;
+      transform: scale(0.5);
+      pointer-events: none;
+      transition: all 0.5s ease;
+    }
+    .card.wrong {
+      animation: shake 0.4s ease-in-out;
+      border-color: #e53935;
+      background: #ffebee;
+    }
+
+    .icon-wrap { font-size: 40px; display: flex; align-items: center; }
+    .num-badge {
+      font-size: 32px;
+      font-weight: 800;
+      min-width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .bunny-card .num-badge { background: linear-gradient(135deg, #ff80ab, #f06292); }
+    .carrot-card .num-badge { background: linear-gradient(135deg, #ff9800, #f57c00); }
+
+    /* Victory Modal */
+    #victory-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99;
+    }
+    .victory-card {
+      background: #fff;
+      padding: 35px;
+      border-radius: 28px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      max-width: 480px;
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .victory-card h2 { color: #2e7d32; font-size: 30px; margin-bottom: 12px; }
+    .victory-card p { font-size: 18px; color: #555; margin-bottom: 24px; }
+    .btn-restart {
+      padding: 12px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background: #4caf50;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+      transition: 0.2s;
+    }
+    .btn-restart:hover { background: #388e3c; }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+    @keyframes popIn {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    canvas#confetti { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 100; }
+
+    /* Tối ưu hiển thị Responsive trên Tablet & Điện thoại di động */
+    @media (max-width: 650px) {
+      body { padding: 10px 8px; }
+      header { padding: 10px 16px; border-radius: 16px; margin-bottom: 10px; }
+      h1 { font-size: 20px; }
+      p.guide { font-size: 13px; }
+      .game-board { gap: 10px; }
+      .column { padding: 10px 8px; border-radius: 18px; gap: 8px; }
+      .column-title { font-size: 14px; padding-bottom: 6px; }
+      .card { padding: 8px 10px; border-radius: 14px; }
+      .icon-wrap { font-size: 28px; }
+      .num-badge { font-size: 22px; min-width: 40px; height: 40px; }
+      .victory-card { padding: 24px 16px; border-radius: 20px; margin: 0 12px; }
+      .victory-card h2 { font-size: 24px; }
+      .victory-card p { font-size: 15px; }
+      .btn-restart { font-size: 16px; padding: 10px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🐰 KHU VƯỜN KỲ DIỆU 🥕</h1>
+    <p class="guide">Chạm chọn 1 Thỏ và 1 Cà rốt sao cho tổng hai số bằng 10!</p>
+  </header>
+
+  <div class="game-board">
+    <!-- Cột Thỏ -->
+    <div class="column bunnies-col">
+      <div class="column-title">ĐÀN THỎ ĐÓI BỤNG</div>
+      <div id="bunny-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </div>
+
+    <!-- Cột Cà rốt -->
+    <div class="column carrots-col">
+      <div class="column-title">VƯỜN CÀ RỐT</div>
+      <div id="carrot-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </div>
+  </div>
+
+  <div id="victory-modal">
+    <div class="victory-card">
+      <div style="font-size: 60px; margin-bottom: 10px;">🎉 🏆 🥕</div>
+      <h2>XUẤT SẮC!</h2>
+      <p>Cả lớp đã giúp tất cả chú thỏ tìm đúng phần ăn với tổng bằng 10!</p>
+      <button class="btn-restart" onclick="initGame()">Chơi lại vòng mới</button>
+    </div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    const PAIRS = [
+      { a: 1, b: 9 },
+      { a: 2, b: 8 },
+      { a: 3, b: 7 },
+      { a: 4, b: 6 },
+      { a: 5, b: 5 }
+    ];
+
+    let selectedBunny = null;
+    let selectedCarrot = null;
+    let remainingPairs = PAIRS.length;
+
+    // Bộ tạo âm thanh chuẩn Web Audio (Không cần tải file âm thanh ngoài)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(freq, type = 'sine', duration = 0.15) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    function soundSuccess() {
+      playBeep(523.25, 'sine', 0.12);
+      setTimeout(() => playBeep(659.25, 'sine', 0.15), 100);
+      setTimeout(() => playBeep(783.99, 'sine', 0.25), 200);
+    }
+    function soundWrong() {
+      playBeep(220, 'sawtooth', 0.15);
+      setTimeout(() => playBeep(180, 'sawtooth', 0.2), 120);
+    }
+    function soundVictory() {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, idx) => {
+        setTimeout(() => playBeep(freq, 'triangle', 0.3), idx * 150);
+      });
+    }
+
+    function shuffle(arr) {
+      return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    function initGame() {
+      remainingPairs = PAIRS.length;
+      selectedBunny = null;
+      selectedCarrot = null;
+      document.getElementById('victory-modal').style.display = 'none';
+
+      const bunnyListEl = document.getElementById('bunny-list');
+      const carrotListEl = document.getElementById('carrot-list');
+      bunnyListEl.innerHTML = '';
+      carrotListEl.innerHTML = '';
+
+      const bunnies = shuffle(PAIRS.map(p => p.a));
+      const carrots = shuffle(PAIRS.map(p => p.b));
+
+      bunnies.forEach(val => {
+        const div = document.createElement('div');
+        div.className = 'card bunny-card';
+        div.dataset.value = val;
+        div.innerHTML = `<span class="icon-wrap">🐰</span><span class="num-badge">${val}</span>`;
+        div.onclick = () => selectBunny(div, val);
+        bunnyListEl.appendChild(div);
+      });
+
+      carrots.forEach(val => {
+        const div = document.createElement('div');
+        div.className = 'card carrot-card';
+        div.dataset.value = val;
+        div.innerHTML = `<span class="num-badge">${val}</span><span class="icon-wrap">🥕</span>`;
+        div.onclick = () => selectCarrot(div, val);
+        carrotListEl.appendChild(div);
+      });
+    }
+
+    function selectBunny(el, val) {
+      if (el.classList.contains('matched')) return;
+      if (selectedBunny) selectedBunny.el.classList.remove('selected');
+      selectedBunny = { el, val };
+      el.classList.add('selected');
+      playBeep(440, 'sine', 0.08);
+      checkMatch();
+    }
+
+    function selectCarrot(el, val) {
+      if (el.classList.contains('matched')) return;
+      if (selectedCarrot) selectedCarrot.el.classList.remove('selected');
+      selectedCarrot = { el, val };
+      el.classList.add('selected');
+      playBeep(493.88, 'sine', 0.08);
+      checkMatch();
+    }
+
+    function checkMatch() {
+      if (!selectedBunny || !selectedCarrot) return;
+
+      const sum = selectedBunny.val + selectedCarrot.val;
+      const bEl = selectedBunny.el;
+      const cEl = selectedCarrot.el;
+
+      if (sum === 10) {
+        soundSuccess();
+        bEl.classList.remove('selected');
+        cEl.classList.remove('selected');
+        bEl.classList.add('matched');
+        cEl.classList.add('matched');
+        selectedBunny = null;
+        selectedCarrot = null;
+        remainingPairs--;
+
+        if (remainingPairs === 0) {
+          setTimeout(() => {
+            soundVictory();
+            startConfetti();
+            document.getElementById('victory-modal').style.display = 'flex';
+          }, 600);
+        }
+      } else {
+        soundWrong();
+        bEl.classList.add('wrong');
+        cEl.classList.add('wrong');
+        setTimeout(() => {
+          bEl.classList.remove('wrong', 'selected');
+          cEl.classList.remove('wrong', 'selected');
+          selectedBunny = null;
+          selectedCarrot = null;
+        }, 450);
+      }
+    }
+
+    // Hiệu ứng pháo giấy chúc mừng
+    function startConfetti() {
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const pieces = Array.from({ length: 90 }, () => ({
+        x: Math.random() * canvas.width,
+        y: -20,
+        r: Math.random() * 8 + 4,
+        color: ['#ff4081', '#00e676', '#ffeb3b', '#29b6f6', '#ff9100'][Math.floor(Math.random() * 5)],
+        tilt: Math.random() * 10,
+        tiltAngleInc: Math.random() * 0.07 + 0.05
+      }));
+      let step = 0;
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.tilt = Math.sin(step) * 12;
+          p.y += 3.5;
+          ctx.beginPath();
+          ctx.lineWidth = p.r / 2;
+          ctx.strokeStyle = p.color;
+          ctx.moveTo(p.x + p.tilt + p.r, p.y);
+          ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
+          ctx.stroke();
+        });
+        step += 0.04;
+        if (pieces[0].y < canvas.height + 40) requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    window.onload = initGame;
+  </script>
+</body>
+</html>
