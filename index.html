@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trò Chơi Tương Tác Lớp 1</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 30px;
+      border-radius: 28px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      color: #2c3e50;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .game-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .game-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #333;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .game-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border-color: #48bb78;
+      background: #f0fff4;
+    }
+    .game-card.game-1 {
+      border-left: 8px solid #ff9800;
+    }
+    .game-card.game-2 {
+      border-left: 8px solid #4caf50;
+    }
+    .icon {
+      font-size: 38px;
+    }
+    .info {
+      text-align: left;
+    }
+    .info .title {
+      color: #2d3748;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .info .desc {
+      color: #718096;
+      font-size: 14px;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Góc Trò Chơi Học Tập</h1>
+    <p class="subtitle">Chào mừng các em! Hãy chọn một trò chơi để bắt đầu nhé</p>
+    <div class="game-list">
+      <a href="giupthotimcarot.html" class="game-card game-1">
+        <span class="icon">🐰</span>
+        <div class="info">
+          <div class="title">Giúp Thỏ Tìm Cà Rốt</div>
+          <div class="desc">Ghép các cặp số có tổng bằng 10</div>
+        </div>
+      </a>
+      <a href="vuonxoaikydieu.html" class="game-card game-2">
+        <span class="icon">🥭</span>
+        <div class="info">
+          <div class="title">Vườn Xoài Kỳ Diệu</div>
+          <div class="desc">Thu hoạch xoài & rèn luyện phép tính</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
