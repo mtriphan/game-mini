@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luyện tập: Thu Hoạch Vườn Xoài</title>
+  <title>Thu Hoạch Vườn Xoài</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
     body {
@@ -426,6 +426,47 @@
       setTimeout(() => playBeep(180, 'sawtooth', 0.2), 100);
     }
 
+    // Tiếng vỗ tay chúc mừng khi hoàn thành
+    function playApplauseSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const fanfareNotes = [523.25, 659.25, 783.99, 1046.50, 880, 1046.50];
+      const fanfareTimes = [0, 0.14, 0.28, 0.45, 0.7, 0.95];
+      fanfareNotes.forEach((freq, idx) => {
+        setTimeout(() => playBeep(freq, 'sine', 0.3), fanfareTimes[idx] * 1000);
+      });
+
+      const bufferSize = Math.floor(audioCtx.sampleRate * 0.05);
+      const clapBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = clapBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        const decay = Math.exp(-i / (audioCtx.sampleRate * 0.009));
+        data[i] = (Math.random() * 2 - 1) * decay;
+      }
+
+      for (let i = 0; i < 80; i++) {
+        const delay = Math.pow(Math.random(), 0.75) * 3.2;
+        setTimeout(() => {
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const source = audioCtx.createBufferSource();
+          source.buffer = clapBuffer;
+
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.value = 900 + Math.random() * 800;
+          filter.Q.value = 2.0 + Math.random() * 1.5;
+
+          const gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0.12 + Math.random() * 0.22, audioCtx.currentTime);
+
+          source.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          source.start();
+        }, delay * 1000);
+      }
+    }
+
     // Vẽ quả xoài bằng vector SVG (Vàng hoặc Xanh) với kích thước tùy chỉnh
     function createMangoSVG(colorType, w = null, h = null) {
       const isYellow = colorType === 'yellow';
@@ -556,6 +597,7 @@
       });
 
       startConfetti();
+      playApplauseSound();
     }
 
     function resetGame() {

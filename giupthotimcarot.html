@@ -234,10 +234,43 @@
       setTimeout(() => playBeep(180, 'sawtooth', 0.2), 120);
     }
     function soundVictory() {
-      const notes = [523.25, 659.25, 783.99, 1046.50];
+      // 1. Nhạc chuông chiến thắng
+      const notes = [523.25, 659.25, 783.99, 1046.50, 880, 1046.50];
       notes.forEach((freq, idx) => {
-        setTimeout(() => playBeep(freq, 'triangle', 0.3), idx * 150);
+        setTimeout(() => playBeep(freq, 'triangle', 0.3), idx * 140);
       });
+
+      // 2. Tiếng vỗ tay nồng nhiệt của cả lớp (Web Audio API)
+      const bufferSize = Math.floor(audioCtx.sampleRate * 0.05);
+      const clapBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = clapBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        const decay = Math.exp(-i / (audioCtx.sampleRate * 0.009));
+        data[i] = (Math.random() * 2 - 1) * decay;
+      }
+
+      for (let i = 0; i < 80; i++) {
+        const delay = Math.pow(Math.random(), 0.75) * 3.2;
+        setTimeout(() => {
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const source = audioCtx.createBufferSource();
+          source.buffer = clapBuffer;
+
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.value = 900 + Math.random() * 800;
+          filter.Q.value = 2.0 + Math.random() * 1.5;
+
+          const gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0.12 + Math.random() * 0.22, audioCtx.currentTime);
+
+          source.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          source.start();
+        }, delay * 1000);
+      }
     }
 
     function shuffle(arr) {

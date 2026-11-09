@@ -153,9 +153,10 @@
     }
 
     .orchard-stage {
-      width: 100%;
-      height: 100%;
       position: relative;
+      height: 100%;
+      max-width: 100%;
+      aspect-ratio: 1000 / 600; /* Khóa tỷ lệ 10:6 khớp 100% với SVG để tọa độ quả táo chuẩn xác */
     }
 
     /* Cây táo SVG chân thực */
@@ -450,27 +451,27 @@
         <!-- Cành giữa vươn cao -->
         <path d="M492 310 L496 150 C496 145 504 145 504 150 L508 310 Z" fill="url(#branchBark)"/>
 
-        <!-- TÁN LÁ CÂY TÁO TỰ NHIÊN (KHÔNG PHẢI HÌNH TRÒN ĐƠN ĐIỆU) -->
-        <!-- LỚP 1: Tán lá rậm bên trong (Tạo bóng tối và chiều sâu 3D) -->
-        <path d="M190 240 C170 190 220 140 280 150 C320 90 420 100 450 145 C500 80 600 90 640 145 C710 100 790 140 800 200 C850 240 830 310 770 330 C720 370 630 350 590 320 C540 360 450 360 410 320 C360 360 280 340 240 310 C180 300 170 260 190 240 Z" fill="url(#foliageDeep)"/>
+        <!-- TÁN LÁ CÂY TÁO XUM XUÊ, RẬM RẠP (Tán cây rộng ôm trọn toàn bộ quả táo) -->
+        <!-- LỚP 1: Tán lá rậm bên trong (Tạo bóng tối và chiều sâu 3D rộng lớn) -->
+        <path d="M140 250 C110 180 160 120 250 125 C290 60 410 65 450 110 C500 50 610 60 650 110 C720 65 830 110 850 180 C900 220 890 300 820 330 C770 390 640 380 590 330 C540 385 440 385 400 330 C340 390 240 370 200 320 C130 310 110 270 140 250 Z" fill="url(#foliageDeep)"/>
 
-        <!-- LỚP 2: Các khối chùm lá tự nhiên ở giữa (Xanh lá tự nhiên) -->
-        <!-- Chùm bên trái -->
-        <path d="M180 220 C170 175 220 145 260 160 C290 120 360 130 380 170 C410 185 415 230 385 255 C370 295 300 305 260 285 C210 300 175 265 180 220 Z" fill="url(#foliageMid)"/>
-        <!-- Chùm bên phải -->
-        <path d="M620 170 C640 130 710 120 740 160 C780 145 830 175 820 220 C825 265 790 300 740 285 C700 305 630 295 615 255 C585 230 590 185 620 170 Z" fill="url(#foliageMid)"/>
-        <!-- Chùm vòm trên đỉnh -->
-        <path d="M370 130 C390 75 480 70 515 110 C550 70 640 75 660 130 C690 155 675 210 635 225 C605 255 520 250 490 220 C460 250 375 255 345 225 C305 210 290 155 370 130 Z" fill="url(#foliageMid)"/>
+        <!-- LỚP 2: Các khối chùm lá tự nhiên ở giữa (Màu xanh lá tự nhiên dày dặn) -->
+        <!-- Chùm bên trái mở rộng -->
+        <path d="M140 230 C130 170 190 135 245 150 C275 105 350 115 375 155 C410 170 415 220 380 250 C365 295 290 310 245 285 C190 305 145 270 140 230 Z" fill="url(#foliageMid)"/>
+        <!-- Chùm bên phải mở rộng -->
+        <path d="M625 155 C650 115 725 105 755 150 C800 135 860 170 850 220 C855 270 810 305 755 285 C710 310 635 295 620 250 C585 220 590 170 625 155 Z" fill="url(#foliageMid)"/>
+        <!-- Chùm vòm trên đỉnh vươn cao -->
+        <path d="M360 120 C380 60 475 55 515 95 C555 55 650 60 670 120 C700 145 685 205 645 220 C610 255 520 250 490 220 C460 250 370 255 335 220 C295 205 280 145 360 120 Z" fill="url(#foliageMid)"/>
 
         <!-- LỚP 3: Các chùm lá bồng bềnh phía trước đón ánh sáng mặt trời -->
         <!-- Chùm đón nắng bên trái -->
-        <path d="M220 215 C220 185 250 165 280 175 C300 150 345 155 360 180 C380 195 385 225 365 245 C350 270 305 275 280 260 C245 270 220 245 220 215 Z" fill="url(#foliageSun)"/>
+        <path d="M180 220 C180 175 225 150 260 165 C285 135 340 140 355 170 C380 185 385 220 360 240 C345 270 295 275 265 260 C225 275 185 250 180 220 Z" fill="url(#foliageSun)"/>
         <!-- Chùm đón nắng trung tâm -->
-        <path d="M430 185 C435 145 490 135 520 165 C550 135 605 145 610 185 C630 205 620 245 585 255 C560 275 480 275 455 255 C420 245 410 205 430 185 Z" fill="url(#foliageSun)"/>
+        <path d="M420 175 C425 130 485 120 520 155 C555 120 615 130 620 175 C640 195 630 240 590 250 C565 275 475 275 450 250 C410 240 400 195 420 175 Z" fill="url(#foliageSun)"/>
         <!-- Chùm đón nắng bên phải -->
-        <path d="M640 180 C655 155 700 150 720 175 C750 165 780 185 780 215 C780 245 755 270 720 260 C695 275 650 270 635 245 C615 225 620 195 640 180 Z" fill="url(#foliageSun)"/>
+        <path d="M645 170 C660 140 715 135 740 165 C775 150 815 175 815 210 C815 245 785 270 745 260 C715 275 665 270 645 240 C625 220 630 185 645 170 Z" fill="url(#foliageSun)"/>
         <!-- Vòm chóp đỉnh đón nắng -->
-        <path d="M450 105 C465 75 535 75 550 105 C570 120 560 150 535 160 C510 170 470 170 445 160 C420 150 410 120 450 105 Z" fill="url(#foliageSun)"/>
+        <path d="M440 95 C460 60 540 60 560 95 C580 115 570 145 540 155 C510 165 470 165 440 155 C410 145 400 115 440 95 Z" fill="url(#foliageSun)"/>
 
         <!-- Các kẽ hở tự nhiên để lộ cành nhánh bên trong -->
         <ellipse cx="498" cy="275" rx="16" ry="10" fill="#64b5f6" opacity="0.45"/>
@@ -530,30 +531,29 @@
   <canvas id="confetti"></canvas>
 
   <script>
-    // Cấu hình 14 quả táo gắn tự nhiên trên cành và kẽ lá:
+    // Cấu hình 14 quả táo nằm hoàn toàn 100% bên trong tán lá xanh của cây:
     // Số 1, 7, 8, 9: mỗi số 1 quả
     // Số 2, 3, 4, 5, 6: mỗi số 2 quả
     const APPLES_DATA = [
-      { id: 'a1',   number: 1, top: 22, left: 22 },
+      // Hàng trên (Upper canopy)
+      { id: 'a8',   number: 8, top: 25, left: 26 },
+      { id: 'a3_1', number: 3, top: 23, left: 37 },
+      { id: 'a4_2', number: 4, top: 21, left: 50 },
+      { id: 'a2_2', number: 2, top: 24, left: 63 },
+      { id: 'a7',   number: 7, top: 26, left: 72 },
       
-      { id: 'a2_1', number: 2, top: 40, left: 16 },
-      { id: 'a2_2', number: 2, top: 16, left: 66 },
-      
-      { id: 'a3_1', number: 3, top: 12, left: 34 },
-      { id: 'a3_2', number: 3, top: 38, left: 74 },
-      
-      { id: 'a4_1', number: 4, top: 32, left: 30 },
-      { id: 'a4_2', number: 4, top: 12, left: 52 },
-      
-      { id: 'a5_1', number: 5, top: 44, left: 45 },
-      { id: 'a5_2', number: 5, top: 28, left: 62 },
-      
-      { id: 'a6_1', number: 6, top: 24, left: 42 },
-      { id: 'a6_2', number: 6, top: 38, left: 56 },
-      
-      { id: 'a7',   number: 7, top: 14, left: 78 },
-      { id: 'a8',   number: 8, top: 13, left: 18 },
-      { id: 'a9',   number: 9, top: 43, left: 26 }
+      // Hàng giữa (Mid canopy)
+      { id: 'a1',   number: 1, top: 34, left: 22 },
+      { id: 'a4_1', number: 4, top: 35, left: 33 },
+      { id: 'a6_1', number: 6, top: 32, left: 44 },
+      { id: 'a5_2', number: 5, top: 34, left: 56 },
+      { id: 'a3_2', number: 3, top: 36, left: 68 },
+
+      // Hàng dưới (Lower canopy)
+      { id: 'a2_1', number: 2, top: 45, left: 25 },
+      { id: 'a9',   number: 9, top: 47, left: 36 },
+      { id: 'a5_1', number: 5, top: 48, left: 47 },
+      { id: 'a6_2', number: 6, top: 46, left: 58 }
     ];
 
     // Kho phép tính cộng trong phạm vi 6 cho kết quả 2, 3, 4, 5, 6
