@@ -55,48 +55,73 @@
       margin: auto 0;
     }
 
-    /* Khung cành cây & hàng xoài */
-    .branch-display {
-      width: 100%;
-      background: linear-gradient(180deg, #fff3e0 0%, #ffe0b2 100%);
-      border-radius: 24px;
-      padding: 20px;
+    /* Khung bài toán phép tính trực quan bằng quả xoài */
+    .visual-equation {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 16px;
       flex-wrap: wrap;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
-      border: 2px dashed #ffb74d;
-      min-height: 140px;
+      width: 100%;
+      background: #fafafa;
+      border-radius: 24px;
+      padding: 16px 14px;
+      border: 2px solid #e0e0e0;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .mango-plate {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 20px;
+      min-height: 100px;
+      min-width: 90px;
+      flex-wrap: wrap;
+      transition: all 0.3s;
+    }
+    .plate-yellow {
+      background: linear-gradient(180deg, #fffde7 0%, #fff9c4 100%);
+      border: 3px dashed #fbc02d;
+      box-shadow: 0 4px 10px rgba(251, 192, 45, 0.25);
+    }
+    .plate-green {
+      background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 100%);
+      border: 3px dashed #43a047;
+      box-shadow: 0 4px 10px rgba(67, 160, 71, 0.25);
+    }
+
+    .math-operator {
+      font-size: 46px;
+      font-weight: 900;
+      color: #1b5e20;
+      padding: 0 4px;
     }
 
     .mango-unit {
       display: flex;
       flex-direction: column;
       align-items: center;
-      animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: bounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .mango-svg {
-      width: 70px;
-      height: 90px;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+      width: 58px;
+      height: 76px;
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.15));
       transition: transform 0.2s;
     }
     .mango-svg:hover { transform: scale(1.1) rotate(-5deg); }
 
-    /* Dòng phép tính */
-    .equation-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      font-size: 46px;
-      font-weight: 800;
-      color: #1b5e20;
+    .guide-text {
+      font-size: 19px;
+      color: #555;
+      font-weight: 700;
+      min-height: 32px;
+      text-align: center;
+      transition: all 0.3s;
     }
-    .num-yellow { color: #f57f17; }
-    .num-green { color: #2e7d32; }
     .answer-box {
       min-width: 75px;
       height: 75px;
@@ -228,23 +253,30 @@
         border-radius: 22px;
         gap: 16px;
       }
-      .branch-display {
-        padding: 14px 10px;
+      .visual-equation {
         gap: 8px;
-        min-height: 110px;
+        padding: 12px 8px;
+      }
+      .mango-plate {
+        padding: 8px 10px;
+        min-height: 80px;
+        min-width: 65px;
+        gap: 4px;
       }
       .mango-svg {
-        width: 55px;
-        height: 72px;
+        width: 44px;
+        height: 58px;
       }
-      .equation-bar {
-        font-size: 36px;
-        gap: 12px;
+      .math-operator {
+        font-size: 32px;
+      }
+      .guide-text {
+        font-size: 16px;
       }
       .answer-box {
-        min-width: 60px;
-        height: 60px;
-        font-size: 38px;
+        min-width: 58px;
+        height: 58px;
+        font-size: 36px;
         border-radius: 14px;
         border-width: 3px;
       }
@@ -316,8 +348,9 @@
 
   <header>
     <div class="header-title">
-      <h1>🥭 VƯỜN XOÀI KỲ DIỆU 🥭</h1>
-      <p>Quan sát số xoài chín (vàng) và xoài xanh để điền số đúng!</p>
+      <h1 style="color: #e6c014; font-size: 30px;">LUYỆN TẬP</h1>
+      <h4 style="color: #2e7d32; font-size: 26px;"> SỐ ?</h4>
+      <!-- <p>Quan sát số xoài chín (vàng) và xoài xanh để điền số đúng!</p> -->
     </div>
     <div class="progress-pill" id="progress-text">Câu 1 / 5</div>
   </header>
@@ -325,27 +358,27 @@
   <div class="game-container">
     <!-- Khu vực chơi từng câu -->
     <div id="play-view" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px;">
-      <div class="branch-display" id="mango-display"></div>
-
-      <div class="equation-bar">
-        <span class="num-yellow" id="eq-yellow">5</span>
-        <span>+</span>
-        <span class="num-green" id="eq-green">1</span>
-        <span>=</span>
+      
+      <!-- Phép tính trực quan: quả xoài vàng + quả xoài xanh = ? -->
+      <div class="visual-equation">
+        <div class="mango-plate plate-yellow" id="yellow-mangoes" title="Số xoài vàng"></div>
+        <span class="math-operator">+</span>
+        <div class="mango-plate plate-green" id="green-mangoes" title="Số xoài xanh"></div>
+        <span class="math-operator">=</span>
         <div class="answer-box" id="answer-box">?</div>
       </div>
 
-      <p style="font-size: 18px; color: #666; font-weight: 600;">Chọn số thích hợp thay cho dấu "?"</p>
+      <p class="guide-text" id="guide-text">Đếm số xoài vàng và xoài xanh rồi chọn số thích hợp thay cho dấu "?"</p>
       <div class="options-row" id="options-container"></div>
     </div>
 
     <!-- Màn hình tổng kết quy luật toàn bài -->
     <div id="summary-view">
       <div style="font-size: 48px;">🎉 🏆 🥭</div>
-      <h2 style="color: #2e7d32; font-size: 26px;">XUẤT SẮC! CẢ LỚP ĐÃ HOÀN THÀNH BÀI TẬP</h2>
-      <p style="font-size: 17px; color: #444; text-align: center;">
+      <h2 style="color: #2e7d32; font-size: 26px;">XUẤT SẮC! EM ĐÃ HOÀN THÀNH BÀI TẬP</h2>
+      <!-- <p style="font-size: 17px; color: #444; text-align: center;">
         Các con hãy quan sát: <b>Dù số xoài vàng giảm đi và xoài xanh tăng lên</b>, tổng số xoài trên mỗi cành luôn luôn là <b>6</b>!
-      </p>
+      </p> -->
       
       <div class="summary-table" id="summary-table-content"></div>
 
@@ -393,15 +426,16 @@
       setTimeout(() => playBeep(180, 'sawtooth', 0.2), 100);
     }
 
-    // Vẽ quả xoài bằng vector SVG (Vàng hoặc Xanh)
-    function createMangoSVG(colorType) {
+    // Vẽ quả xoài bằng vector SVG (Vàng hoặc Xanh) với kích thước tùy chỉnh
+    function createMangoSVG(colorType, w = null, h = null) {
       const isYellow = colorType === 'yellow';
       const mainColor = isYellow ? '#FFB300' : '#43A047';
       const shadowColor = isYellow ? '#FFA000' : '#2E7D32';
       const leafColor = isYellow ? '#4CAF50' : '#2E7D32';
+      const sizeStyle = (w && h) ? `style="width:${w}px; height:${h}px;"` : '';
 
       return `
-        <svg class="mango-svg" viewBox="0 0 100 130">
+        <svg class="mango-svg" ${sizeStyle} viewBox="0 0 100 130">
           <!-- Cuống và lá -->
           <path d="M50 35 C48 20 40 10 32 5 C38 18 45 25 48 35 Z" fill="#6d4c41"/>
           <path d="M52 25 C68 18 80 22 88 12 C82 28 72 32 52 30 Z" fill="${leafColor}"/>
@@ -417,27 +451,33 @@
     function renderQuestion(index) {
       const q = QUESTIONS[index];
       document.getElementById('progress-text').innerText = `Câu ${index + 1} / ${QUESTIONS.length}`;
-      document.getElementById('eq-yellow').innerText = q.yellow;
-      document.getElementById('eq-green').innerText = q.green;
       
       const answerBox = document.getElementById('answer-box');
       answerBox.innerText = '?';
       answerBox.className = 'answer-box';
 
-      // Tạo hình ảnh xoài vàng và xoài xanh
-      const display = document.getElementById('mango-display');
-      display.innerHTML = '';
+      const guideText = document.getElementById('guide-text');
+      guideText.innerHTML = 'Đếm số xoài vàng và xoài xanh rồi chọn số thích hợp thay cho dấu "?"';
+      guideText.style.color = '#555';
+
+      // Hiển thị số lượng quả xoài màu vàng (thay cho số)
+      const yellowBox = document.getElementById('yellow-mangoes');
+      yellowBox.innerHTML = '';
       for (let i = 0; i < q.yellow; i++) {
         const div = document.createElement('div');
         div.className = 'mango-unit';
         div.innerHTML = createMangoSVG('yellow');
-        display.appendChild(div);
+        yellowBox.appendChild(div);
       }
+
+      // Hiển thị số lượng quả xoài màu xanh (thay cho số)
+      const greenBox = document.getElementById('green-mangoes');
+      greenBox.innerHTML = '';
       for (let i = 0; i < q.green; i++) {
         const div = document.createElement('div');
         div.className = 'mango-unit';
         div.innerHTML = createMangoSVG('green');
-        display.appendChild(div);
+        greenBox.appendChild(div);
       }
 
       // Tạo các nút đáp án trắc nghiệm
@@ -447,21 +487,26 @@
         const btn = document.createElement('button');
         btn.className = 'opt-btn';
         btn.innerText = num;
-        btn.onclick = () => handleChoice(btn, num, q.result);
+        btn.onclick = () => handleChoice(btn, num, q);
         optsContainer.appendChild(btn);
       });
       isProcessing = false;
     }
 
-    function handleChoice(btn, chosenNum, correctNum) {
+    function handleChoice(btn, chosenNum, q) {
       if (isProcessing) return;
 
-      if (chosenNum === correctNum) {
+      if (chosenNum === q.result) {
         isProcessing = true;
         soundCorrect();
         const answerBox = document.getElementById('answer-box');
         answerBox.innerText = chosenNum;
         answerBox.classList.add('filled');
+
+        // Hiện thông báo củng cố kiến thức
+        const guideText = document.getElementById('guide-text');
+        guideText.innerHTML = `🎉 Chính xác! <b>${q.yellow}</b> xoài vàng + <b>${q.green}</b> xoài xanh = <b>${q.result}</b> quả xoài!`;
+        guideText.style.color = '#2e7d32';
 
         setTimeout(() => {
           if (currentIndex < QUESTIONS.length - 1) {
@@ -470,7 +515,7 @@
           } else {
             showSummary();
           }
-        }, 1100);
+        }, 1200);
       } else {
         soundWrong();
         btn.classList.add('wrong');
@@ -488,9 +533,24 @@
       QUESTIONS.forEach(q => {
         const row = document.createElement('div');
         row.className = 'summary-row';
+
+        // Chuỗi quả xoài vàng và xoài xanh thu nhỏ
+        let yellowIcons = '';
+        for (let i = 0; i < q.yellow; i++) {
+          yellowIcons += createMangoSVG('yellow', 24, 32);
+        }
+        let greenIcons = '';
+        for (let i = 0; i < q.green; i++) {
+          greenIcons += createMangoSVG('green', 24, 32);
+        }
+
         row.innerHTML = `
-          <span>🥭 <b>${q.yellow}</b> xoài vàng + <b>${q.green}</b> xoài xanh</span>
-          <span style="color:#2e7d32;">➜ <b>${q.yellow} + ${q.green} = 6</b></span>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <div style="display: flex; gap: 3px;">${yellowIcons}</div>
+            <span style="font-weight: 900; font-size: 20px; color: #2e7d32;">+</span>
+            <div style="display: flex; gap: 3px;">${greenIcons}</div>
+          </div>
+          <span style="color: #2e7d32; font-size: 22px; font-weight: 800;">${q.yellow} + ${q.green} = 6</span>
         `;
         table.appendChild(row);
       });
