@@ -12,17 +12,17 @@
       width: 100%;
       height: 100vh;
       max-height: 100vh;
-      overflow: hidden; /* Cố định 1 trang tuyệt đối, không lăn chuột */
+      overflow: hidden; /* Cố định 1 màn hình tuyệt đối, không có thanh cuộn */
       font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background: linear-gradient(180deg, #7ad5fb 0%, #b8e9ff 48%, #86d448 48%, #5da929 100%);
+      background: linear-gradient(180deg, #64b5f6 0%, #b3e5fc 46%, #7cb342 46%, #4c8c2b 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 14px 10px;
+      padding: 6px 14px 10px;
       position: relative;
     }
 
@@ -41,29 +41,29 @@
       background: inherit;
       border-radius: 50%;
     }
-    .cloud1 { width: 110px; height: 35px; top: 20px; left: -130px; animation-duration: 32s; }
-    .cloud1::before { width: 45px; height: 45px; top: -20px; left: 18px; }
-    .cloud1::after { width: 35px; height: 35px; top: -14px; left: 50px; }
+    .cloud1 { width: 120px; height: 36px; top: 16px; left: -140px; animation-duration: 34s; }
+    .cloud1::before { width: 46px; height: 46px; top: -20px; left: 18px; }
+    .cloud1::after { width: 38px; height: 38px; top: -14px; left: 56px; }
 
-    .cloud2 { width: 130px; height: 38px; top: 55px; left: -150px; animation-duration: 40s; animation-delay: 14s; }
-    .cloud2::before { width: 50px; height: 50px; top: -24px; left: 24px; }
-    .cloud2::after { width: 40px; height: 40px; top: -16px; left: 68px; }
+    .cloud2 { width: 140px; height: 40px; top: 48px; left: -160px; animation-duration: 44s; animation-delay: 15s; }
+    .cloud2::before { width: 54px; height: 54px; top: -24px; left: 24px; }
+    .cloud2::after { width: 42px; height: 42px; top: -16px; left: 74px; }
 
     @keyframes floatCloud {
       from { transform: translateX(0); }
-      to { transform: translateX(calc(100vw + 220px)); }
+      to { transform: translateX(calc(100vw + 240px)); }
     }
 
     /* Mặt trời tỏa nắng nhẹ */
     .sun {
       position: absolute;
       top: 10px;
-      right: 30px;
-      width: 65px;
-      height: 65px;
-      background: radial-gradient(circle, #fff176 30%, #fbc02d 100%);
+      right: 32px;
+      width: 68px;
+      height: 68px;
+      background: radial-gradient(circle, #fff9c4 25%, #fbc02d 100%);
       border-radius: 50%;
-      box-shadow: 0 0 35px #fff59d, 0 0 60px rgba(255, 238, 88, 0.6);
+      box-shadow: 0 0 35px #fff9c4, 0 0 70px rgba(255, 238, 88, 0.65);
       z-index: 1;
       pointer-events: none;
     }
@@ -72,7 +72,7 @@
     header {
       width: 100%;
       max-width: 980px;
-      height: 48px;
+      height: 46px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -85,15 +85,16 @@
     }
     .header-title h1 {
       font-size: 20px;
-      color: #d32f2f;
+      color: #c62828;
       display: flex;
       align-items: center;
       gap: 6px;
       margin: 0;
+      font-weight: 900;
     }
     .progress-pill {
       background: #ffebee;
-      color: #c62828;
+      color: #b71c1c;
       font-weight: 900;
       font-size: 15px;
       padding: 4px 14px;
@@ -110,14 +111,14 @@
       align-items: center;
       z-index: 10;
       flex-shrink: 0;
-      margin: 4px 0 2px;
+      margin: 3px 0 2px;
     }
     .question-board {
-      background: linear-gradient(180deg, #9c6030 0%, #753f17 100%);
-      border: 3.5px solid #4e2608;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.22), inset 0 2px 4px rgba(255,255,255,0.25);
+      background: linear-gradient(180deg, #8d5020 0%, #683611 100%);
+      border: 3.5px solid #452106;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.24), inset 0 2px 4px rgba(255,255,255,0.25);
       border-radius: 18px;
-      padding: 6px 26px;
+      padding: 6px 28px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -135,15 +136,15 @@
       color: #ffffff;
       font-weight: 800;
       margin-top: 3px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
     }
 
-    /* KHUNG VƯỜN CÂY VÀ TÁO - Tự động co giãn theo toàn bộ chiều cao còn lại */
+    /* KHUNG VƯỜN CÂY VÀ TÁO - Tự động co giãn theo chiều dọc còn lại */
     .orchard-wrapper {
       width: 100%;
       max-width: 980px;
       flex: 1; /* Chiếm trọn không gian dọc còn lại */
-      min-height: 0; /* Quan trọng để không bị tràn màn hình */
+      min-height: 0; /* Quan trọng để không tràn trang */
       position: relative;
       display: flex;
       align-items: center;
@@ -154,11 +155,10 @@
     .orchard-stage {
       width: 100%;
       height: 100%;
-      max-height: 100%;
       position: relative;
     }
 
-    /* Cây táo SVG nghệ thuật */
+    /* Cây táo SVG chân thực */
     .tree-svg {
       width: 100%;
       height: 100%;
@@ -168,11 +168,11 @@
       pointer-events: none;
     }
 
-    /* Các quả táo trên cây */
+    /* Quả táo thực tế trên cây */
     .apple-item {
       position: absolute;
-      width: clamp(52px, 6.2vw, 68px);
-      height: clamp(58px, 6.8vw, 76px);
+      width: clamp(52px, 6vw, 68px);
+      height: clamp(58px, 6.7vw, 76px);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -183,26 +183,26 @@
       touch-action: manipulation;
     }
     .apple-item:hover {
-      transform: scale(1.18) rotate(5deg);
+      transform: scale(1.18) rotate(4deg);
     }
     .apple-svg {
       width: 100%;
       height: 100%;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
     }
     .apple-number {
       position: absolute;
-      font-size: clamp(22px, 2.5vw, 28px);
+      font-size: clamp(21px, 2.4vw, 27px);
       font-weight: 900;
       color: #ffffff;
-      top: 56%;
+      top: 57%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-shadow: 1px 1px 2px #b71c1c, 0 2px 4px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 2px #7f0000, 0 2px 4px rgba(0,0,0,0.6);
       pointer-events: none;
     }
 
-    /* Rung lắc khi sai */
+    /* Rung lắc khi chọn sai */
     .apple-item.wrong {
       animation: appleShake 0.45s ease-in-out;
     }
@@ -214,7 +214,7 @@
       80% { transform: rotate(10deg) scale(1.05); }
     }
 
-    /* Quả táo bay rơi vào giỏ */
+    /* Quả táo rơi vào giỏ */
     .apple-falling {
       position: fixed !important;
       z-index: 999 !important;
@@ -222,12 +222,12 @@
       transition: all 0.75s cubic-bezier(0.45, 0, 0.85, 1) !important;
     }
 
-    /* Giỏ đựng táo dưới gốc cây */
+    /* Giỏ mây đựng táo chân thực dưới gốc cây */
     .basket-container {
       position: absolute;
       bottom: 2%;
       right: 4%;
-      width: clamp(110px, 14vw, 150px);
+      width: clamp(115px, 14vw, 155px);
       height: clamp(85px, 11vw, 115px);
       display: flex;
       flex-direction: column;
@@ -239,7 +239,7 @@
     .basket-svg {
       width: 100%;
       height: 85%;
-      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
     }
     .basket-counter {
       position: absolute;
@@ -251,7 +251,7 @@
       padding: 3px 14px;
       border-radius: 20px;
       border: 2px solid #e65100;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.25);
       white-space: nowrap;
     }
 
@@ -270,10 +270,10 @@
       display: none;
       width: 90%;
       max-width: 600px;
-      background: rgba(255, 255, 255, 0.97);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: 26px;
       padding: 24px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
       text-align: center;
       flex-direction: column;
       align-items: center;
@@ -283,17 +283,35 @@
       animation: popIn 0.5s ease;
     }
     .summary-title {
-      font-size: 24px;
+      font-size: 25px;
       color: #2e7d32;
       font-weight: 900;
     }
     .summary-desc {
       font-size: 16px;
-      color: #555;
+      color: #444;
       font-weight: 700;
+      line-height: 1.5;
+    }
+    .applause-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff8e1;
+      border: 2px solid #ffd54f;
+      color: #e65100;
+      font-weight: 900;
+      font-size: 17px;
+      padding: 6px 18px;
+      border-radius: 30px;
+      animation: pulseBadge 1.2s infinite;
+    }
+    @keyframes pulseBadge {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
     }
     .btn-action {
-      padding: 12px 32px;
+      padding: 13px 34px;
       font-size: 19px;
       font-weight: 900;
       color: #ffffff;
@@ -337,128 +355,160 @@
     <div class="question-hint">Tìm quả táo có số là kết quả của phép tính rồi chạm vào để hái!</div>
   </div>
 
-  <!-- Khung cây táo và quả táo (Tự động co giãn vừa khít 1 màn hình) -->
+  <!-- Khung cây táo và quả táo (Co giãn trọn vẹn trong 1 màn hình) -->
   <div class="orchard-wrapper" id="orchard-wrapper">
     <div class="orchard-stage" id="orchard-stage">
       
-      <!-- CÂY TÁO SVG ĐƯỢC THIẾT KẾ ĐẸP MẮT & SẮC NÉT -->
+      <!-- CÂY TÁO SVG ĐƯỢC THIẾT KẾ THỰC TẾ & SẮC NÉT -->
       <svg class="tree-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <!-- Gradient thân cây gỗ tự nhiên -->
-          <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#543015"/>
-            <stop offset="30%" stop-color="#7a461e"/>
-            <stop offset="70%" stop-color="#935728"/>
-            <stop offset="100%" stop-color="#4a270f"/>
+          <!-- Gradient thân cây gỗ cổ thụ thực tế -->
+          <linearGradient id="trunkBark" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#3d2211"/>
+            <stop offset="25%" stop-color="#5a341b"/>
+            <stop offset="55%" stop-color="#734323"/>
+            <stop offset="80%" stop-color="#5a341b"/>
+            <stop offset="100%" stop-color="#331c0e"/>
           </linearGradient>
 
-          <!-- Gradient vỏ cây có ánh sáng -->
-          <linearGradient id="branchGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#8a5024"/>
-            <stop offset="100%" stop-color="#543015"/>
+          <!-- Vỏ cành phụ -->
+          <linearGradient id="branchBark" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#6e3e1d"/>
+            <stop offset="100%" stop-color="#422410"/>
           </linearGradient>
 
-          <!-- Tán lá tối (Lớp nền sâu) -->
-          <radialGradient id="leafDark" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="#2d7732"/>
-            <stop offset="85%" stop-color="#184a1b"/>
+          <!-- Tán lá tối (Lớp chiều sâu bên trong) -->
+          <radialGradient id="foliageDeep" cx="45%" cy="40%" r="65%">
+            <stop offset="0%" stop-color="#1f5424"/>
+            <stop offset="70%" stop-color="#133d16"/>
+            <stop offset="100%" stop-color="#0b240e"/>
           </radialGradient>
 
-          <!-- Tán lá chính (Xanh tươi) -->
-          <radialGradient id="leafMid" cx="40%" cy="30%" r="65%">
-            <stop offset="0%" stop-color="#4caf50"/>
-            <stop offset="75%" stop-color="#2e7d32"/>
-            <stop offset="100%" stop-color="#1b5e20"/>
+          <!-- Tán lá chính (Màu xanh lá tự nhiên) -->
+          <radialGradient id="foliageMid" cx="40%" cy="30%" r="65%">
+            <stop offset="0%" stop-color="#3e9444"/>
+            <stop offset="65%" stop-color="#2a722e"/>
+            <stop offset="100%" stop-color="#184e1c"/>
           </radialGradient>
 
-          <!-- Tán lá sáng (Đón ánh nắng) -->
-          <radialGradient id="leafLight" cx="40%" cy="25%" r="65%">
-            <stop offset="0%" stop-color="#81c784"/>
-            <stop offset="60%" stop-color="#43a047"/>
-            <stop offset="100%" stop-color="#2e7d32"/>
+          <!-- Tán lá sáng (Đón ánh sáng mặt trời) -->
+          <radialGradient id="foliageSun" cx="38%" cy="25%" r="65%">
+            <stop offset="0%" stop-color="#76ba4e"/>
+            <stop offset="55%" stop-color="#479e39"/>
+            <stop offset="100%" stop-color="#246d23"/>
           </radialGradient>
 
-          <!-- Đồi cỏ nền -->
-          <linearGradient id="hillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#7cb342"/>
-            <stop offset="100%" stop-color="#558b2f"/>
+          <!-- Thảm cỏ nền -->
+          <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#6ea838"/>
+            <stop offset="100%" stop-color="#4c7e22"/>
           </linearGradient>
         </defs>
 
-        <!-- Đồi cỏ bồng bềnh dưới chân cây -->
-        <path d="M0 550 Q250 510 500 535 T1000 540 L1000 600 L0 600 Z" fill="url(#hillGrad)"/>
+        <!-- Bóng râm của tán cây đổ xuống mặt cỏ -->
+        <ellipse cx="500" cy="565" rx="360" ry="24" fill="rgba(0, 0, 0, 0.18)"/>
+
+        <!-- Đồi cỏ mềm mại -->
+        <path d="M0 550 Q250 515 500 538 T1000 545 L1000 600 L0 600 Z" fill="url(#groundGrad)"/>
         
-        <!-- Bụi hoa cỏ nhỏ dễ thương -->
-        <circle cx="180" cy="545" r="7" fill="#fff"/>
-        <circle cx="180" cy="545" r="3" fill="#ffeb3b"/>
-        <circle cx="210" cy="552" r="6" fill="#fff"/>
-        <circle cx="210" cy="552" r="2.5" fill="#ffeb3b"/>
-        <circle cx="340" cy="558" r="7" fill="#ff80ab"/>
-        <circle cx="340" cy="558" r="3" fill="#fff"/>
-        <circle cx="680" cy="550" r="7" fill="#fff"/>
-        <circle cx="680" cy="550" r="3" fill="#ffeb3b"/>
+        <!-- Các búi cỏ xanh mềm tự nhiên quanh gốc -->
+        <path d="M410 560 L418 535 L425 560 L435 530 L442 562 Z" fill="#588e2b"/>
+        <path d="M560 562 L568 532 L575 560 L585 536 L592 560 Z" fill="#588e2b"/>
+        <!-- Hoa dại nhỏ bên gốc cây -->
+        <circle cx="190" cy="548" r="6.5" fill="#ffffff"/>
+        <circle cx="190" cy="548" r="3" fill="#fbc02d"/>
+        <circle cx="215" cy="554" r="5.5" fill="#ffffff"/>
+        <circle cx="215" cy="554" r="2.5" fill="#fbc02d"/>
+        <circle cx="340" cy="558" r="6" fill="#f48fb1"/>
+        <circle cx="340" cy="558" r="2.5" fill="#fff"/>
+        <circle cx="680" cy="552" r="6.5" fill="#ffffff"/>
+        <circle cx="680" cy="552" r="3" fill="#fbc02d"/>
 
-        <!-- RỄ CÂY BÁM ĐẤT CHẮC CHẮN -->
-        <path d="M430 575 C450 540 460 480 470 420 L530 420 C540 480 550 540 580 575 C550 570 530 550 500 555 C470 550 450 570 430 575 Z" fill="url(#trunkGrad)"/>
+        <!-- GỐC CÂY & RỄ TO CẮM SÂU XUỐNG ĐẤT -->
+        <path d="M430 575 C442 545 455 510 468 430 L532 430 C545 510 558 545 575 575 C550 568 530 552 500 556 C470 552 450 568 430 575 Z" fill="url(#trunkBark)"/>
+        <!-- Rễ bên phụ tự nhiên -->
+        <path d="M435 572 C415 574 395 578 375 585 C400 578 425 565 445 550 Z" fill="#3d2211"/>
+        <path d="M570 572 C590 574 610 578 630 585 C605 578 580 565 560 550 Z" fill="#3d2211"/>
 
-        <!-- THÂN CÂY VÀ CÁC CÀNH LỚN VƯƠN RỘNG -->
-        <path d="M470 420 C465 340 440 280 370 210 L410 195 C460 260 485 300 490 350 L510 350 C515 300 540 260 590 195 L630 210 C560 280 535 340 530 420 Z" fill="url(#trunkGrad)"/>
+        <!-- THÂN CÂY CỔ THỤ CÓ GÂN THỚ GỖ UỐN LƯỢN -->
+        <path d="M468 430 C462 355 435 295 365 220 L405 205 C458 268 482 312 488 360 L512 360 C518 312 542 268 595 205 L635 220 C565 295 538 355 532 430 Z" fill="url(#trunkBark)"/>
         
-        <!-- Nhánh cành nhỏ phụ -->
-        <path d="M435 270 C380 240 330 245 280 260 L285 240 C340 225 390 220 450 250 Z" fill="url(#branchGrad)"/>
-        <path d="M565 270 C620 240 670 245 720 260 L715 240 C660 225 610 220 550 250 Z" fill="url(#branchGrad)"/>
-        <path d="M495 290 L505 160 L515 160 L505 290 Z" fill="url(#branchGrad)"/>
+        <!-- Các đường thớ gân vỏ cây sống động -->
+        <path d="M485 530 Q475 440 488 370" stroke="#331c0e" stroke-width="3" fill="none" opacity="0.65"/>
+        <path d="M515 530 Q525 440 512 370" stroke="#331c0e" stroke-width="3" fill="none" opacity="0.65"/>
+        <path d="M500 540 L500 375" stroke="#7a461e" stroke-width="2.5" fill="none" opacity="0.5"/>
 
-        <!-- TÁN LÁ RẬM RẠP BỒNG BỀNH - LỚP 1 (Tối ở sau) -->
-        <circle cx="300" cy="200" r="145" fill="url(#leafDark)"/>
-        <circle cx="700" cy="200" r="145" fill="url(#leafDark)"/>
-        <circle cx="500" cy="140" r="150" fill="url(#leafDark)"/>
-        <circle cx="400" cy="180" r="135" fill="url(#leafDark)"/>
-        <circle cx="600" cy="180" r="135" fill="url(#leafDark)"/>
+        <!-- CÁC CHÁNH CÂY VƯƠN XA NÂNG ĐỠ CÁC TÁN LÁ -->
+        <!-- Cành trái vươn rộng -->
+        <path d="M440 280 C385 245 320 250 255 268 L260 248 C325 230 388 225 450 260 Z" fill="url(#branchBark)"/>
+        <path d="M340 238 C310 195 270 180 230 175 L235 160 C280 165 322 182 355 228 Z" fill="url(#branchBark)"/>
 
-        <!-- TÁN LÁ - LỚP 2 (Màu xanh tươi tự nhiên ở giữa) -->
-        <circle cx="230" cy="230" r="120" fill="url(#leafMid)"/>
-        <circle cx="770" cy="230" r="120" fill="url(#leafMid)"/>
-        <circle cx="330" cy="150" r="130" fill="url(#leafMid)"/>
-        <circle cx="670" cy="150" r="130" fill="url(#leafMid)"/>
-        <circle cx="500" cy="180" r="140" fill="url(#leafMid)"/>
-        <circle cx="420" cy="250" r="110" fill="url(#leafMid)"/>
-        <circle cx="580" cy="250" r="110" fill="url(#leafMid)"/>
+        <!-- Cành phải vươn rộng -->
+        <path d="M560 280 C615 245 680 250 745 268 L740 248 C675 230 612 225 550 260 Z" fill="url(#branchBark)"/>
+        <path d="M660 238 C690 195 730 180 770 175 L765 160 C720 165 678 182 645 228 Z" fill="url(#branchBark)"/>
 
-        <!-- TÁN LÁ - LỚP 3 (Màu xanh sáng bồng bềnh ở phía trước đón nắng) -->
-        <circle cx="300" cy="260" r="100" fill="url(#leafLight)"/>
-        <circle cx="700" cy="260" r="100" fill="url(#leafLight)"/>
-        <circle cx="500" cy="230" r="115" fill="url(#leafLight)"/>
-        <circle cx="380" cy="140" r="95" fill="url(#leafLight)"/>
-        <circle cx="620" cy="140" r="95" fill="url(#leafLight)"/>
-        <circle cx="500" cy="100" r="100" fill="url(#leafLight)"/>
+        <!-- Cành giữa vươn cao -->
+        <path d="M492 310 L496 150 C496 145 504 145 504 150 L508 310 Z" fill="url(#branchBark)"/>
+
+        <!-- TÁN LÁ CÂY TÁO TỰ NHIÊN (KHÔNG PHẢI HÌNH TRÒN ĐƠN ĐIỆU) -->
+        <!-- LỚP 1: Tán lá rậm bên trong (Tạo bóng tối và chiều sâu 3D) -->
+        <path d="M190 240 C170 190 220 140 280 150 C320 90 420 100 450 145 C500 80 600 90 640 145 C710 100 790 140 800 200 C850 240 830 310 770 330 C720 370 630 350 590 320 C540 360 450 360 410 320 C360 360 280 340 240 310 C180 300 170 260 190 240 Z" fill="url(#foliageDeep)"/>
+
+        <!-- LỚP 2: Các khối chùm lá tự nhiên ở giữa (Xanh lá tự nhiên) -->
+        <!-- Chùm bên trái -->
+        <path d="M180 220 C170 175 220 145 260 160 C290 120 360 130 380 170 C410 185 415 230 385 255 C370 295 300 305 260 285 C210 300 175 265 180 220 Z" fill="url(#foliageMid)"/>
+        <!-- Chùm bên phải -->
+        <path d="M620 170 C640 130 710 120 740 160 C780 145 830 175 820 220 C825 265 790 300 740 285 C700 305 630 295 615 255 C585 230 590 185 620 170 Z" fill="url(#foliageMid)"/>
+        <!-- Chùm vòm trên đỉnh -->
+        <path d="M370 130 C390 75 480 70 515 110 C550 70 640 75 660 130 C690 155 675 210 635 225 C605 255 520 250 490 220 C460 250 375 255 345 225 C305 210 290 155 370 130 Z" fill="url(#foliageMid)"/>
+
+        <!-- LỚP 3: Các chùm lá bồng bềnh phía trước đón ánh sáng mặt trời -->
+        <!-- Chùm đón nắng bên trái -->
+        <path d="M220 215 C220 185 250 165 280 175 C300 150 345 155 360 180 C380 195 385 225 365 245 C350 270 305 275 280 260 C245 270 220 245 220 215 Z" fill="url(#foliageSun)"/>
+        <!-- Chùm đón nắng trung tâm -->
+        <path d="M430 185 C435 145 490 135 520 165 C550 135 605 145 610 185 C630 205 620 245 585 255 C560 275 480 275 455 255 C420 245 410 205 430 185 Z" fill="url(#foliageSun)"/>
+        <!-- Chùm đón nắng bên phải -->
+        <path d="M640 180 C655 155 700 150 720 175 C750 165 780 185 780 215 C780 245 755 270 720 260 C695 275 650 270 635 245 C615 225 620 195 640 180 Z" fill="url(#foliageSun)"/>
+        <!-- Vòm chóp đỉnh đón nắng -->
+        <path d="M450 105 C465 75 535 75 550 105 C570 120 560 150 535 160 C510 170 470 170 445 160 C420 150 410 120 450 105 Z" fill="url(#foliageSun)"/>
+
+        <!-- Các kẽ hở tự nhiên để lộ cành nhánh bên trong -->
+        <ellipse cx="498" cy="275" rx="16" ry="10" fill="#64b5f6" opacity="0.45"/>
+        <ellipse cx="382" cy="235" rx="12" ry="7" fill="#64b5f6" opacity="0.4"/>
+        <ellipse cx="618" cy="235" rx="12" ry="7" fill="#64b5f6" opacity="0.4"/>
       </svg>
 
-      <!-- 14 Quả táo được định vị đều và đẹp trên vòm lá -->
+      <!-- 14 Quả táo thực tế được bố trí trên cành cây -->
       <div id="apples-container"></div>
 
-      <!-- Chiếc giỏ đựng táo xinh xắn dưới gốc cây -->
+      <!-- Giỏ mây đựng táo chân thực dưới gốc cây -->
       <div class="basket-container" id="basket">
         <svg class="basket-svg" viewBox="0 0 140 100">
           <defs>
-            <linearGradient id="basketGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#b8860b"/>
-              <stop offset="100%" stop-color="#704214"/>
+            <linearGradient id="basketWood" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#c68a4c"/>
+              <stop offset="50%" stop-color="#9e6229"/>
+              <stop offset="100%" stop-color="#6d3d12"/>
+            </linearGradient>
+            <linearGradient id="rimWood" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#8d5422"/>
+              <stop offset="50%" stop-color="#d49b5d"/>
+              <stop offset="100%" stop-color="#734116"/>
             </linearGradient>
           </defs>
-          <!-- Quai giỏ -->
-          <path d="M22 45 C22 2, 118 2, 118 45" fill="none" stroke="#6d4c41" stroke-width="7" stroke-linecap="round"/>
-          <path d="M25 45 C25 6, 115 6, 115 45" fill="none" stroke="#d7ccc8" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Quai giỏ mây uốn cong chắc khỏe -->
+          <path d="M22 45 C22 2, 118 2, 118 45" fill="none" stroke="#5d3514" stroke-width="7.5" stroke-linecap="round"/>
+          <path d="M24 45 C24 5, 116 5, 116 45" fill="none" stroke="#d7a164" stroke-width="2.5" stroke-linecap="round"/>
           
           <!-- Thân giỏ mây đan -->
-          <path d="M12 40 L26 92 C28 97 34 99 40 99 L100 99 C106 99 112 97 114 92 L128 40 Z" fill="url(#basketGrad)" stroke="#4e342e" stroke-width="3"/>
+          <path d="M12 40 L26 92 C28 97 34 99 40 99 L100 99 C106 99 112 97 114 92 L128 40 Z" fill="url(#basketWood)" stroke="#3e2009" stroke-width="3"/>
           
-          <!-- Họa tiết đan giỏ chéo -->
-          <path d="M25 45 L105 95 M45 42 L112 85 M15 65 L65 98 M115 45 L35 95 M95 42 L28 85 M125 65 L75 98" stroke="rgba(78,52,46,0.6)" stroke-width="2"/>
+          <!-- Họa tiết đan chéo nan mây tự nhiên -->
+          <path d="M25 45 L105 95 M45 42 L112 85 M15 65 L65 98 M115 45 L35 95 M95 42 L28 85 M125 65 L75 98" stroke="rgba(55,25,5,0.65)" stroke-width="2.2"/>
           
-          <!-- Vành miệng giỏ viền nổi -->
-          <ellipse cx="70" cy="40" rx="60" ry="11" fill="#d7ccc8" stroke="#4e342e" stroke-width="3"/>
-          <ellipse cx="70" cy="40" rx="54" ry="7" fill="#8d6e63"/>
+          <!-- Vành miệng giỏ viền nổi bo tròn -->
+          <ellipse cx="70" cy="40" rx="60" ry="11" fill="url(#rimWood)" stroke="#3e2009" stroke-width="3"/>
+          <ellipse cx="70" cy="40" rx="54" ry="7" fill="#542e0d"/>
         </svg>
         <div class="basket-counter" id="basket-counter">🍎 0 quả</div>
       </div>
@@ -466,12 +516,13 @@
     </div>
   </div>
 
-  <!-- Màn hình chiến thắng tổng kết -->
+  <!-- Màn hình chiến thắng tổng kết kèm vỗ tay -->
   <div id="summary-view">
-    <div style="font-size: 50px;">🎉 🏆 🍎</div>
-    <div class="summary-title">BÉ GIỎI QUÁ! ĐÃ HÁI ĐẦY GIỎ TÁO</div>
+    <div style="font-size: 52px;">🎉 🏆 🍎</div>
+    <div class="summary-title">BÉ XUẤT SẮC QUÁ! ĐÃ HÁI ĐẦY GIỎ TÁO</div>
+    <div class="applause-badge">👏 👏 TIẾNG VỖ TAY KHEN THƯỞNG 👏 👏</div>
     <div class="summary-desc">
-      Chúc mừng bé đã tính đúng toàn bộ <b>9 phép tính</b> và hái được <b>9 quả táo đỏ thơm ngon</b> vào giỏ!
+      Chúc mừng bé đã tính đúng toàn bộ <b>9 phép tính</b> và hái được <b>9 quả táo chín mọng</b> vào giỏ!
     </div>
     <button class="btn-action" onclick="resetGame()">Luyện tập lại vòng mới</button>
   </div>
@@ -479,13 +530,13 @@
   <canvas id="confetti"></canvas>
 
   <script>
-    // Cấu hình 14 quả táo phân bố hài hòa trên vòm lá (tọa độ tính theo % sân khấu):
+    // Cấu hình 14 quả táo gắn tự nhiên trên cành và kẽ lá:
     // Số 1, 7, 8, 9: mỗi số 1 quả
     // Số 2, 3, 4, 5, 6: mỗi số 2 quả
     const APPLES_DATA = [
       { id: 'a1',   number: 1, top: 22, left: 22 },
       
-      { id: 'a2_1', number: 2, top: 40, left: 15 },
+      { id: 'a2_1', number: 2, top: 40, left: 16 },
       { id: 'a2_2', number: 2, top: 16, left: 66 },
       
       { id: 'a3_1', number: 3, top: 12, left: 34 },
@@ -505,7 +556,7 @@
       { id: 'a9',   number: 9, top: 43, left: 26 }
     ];
 
-    // Kho phép tính cộng cho kết quả 2, 3, 4, 5, 6
+    // Kho phép tính cộng trong phạm vi 6 cho kết quả 2, 3, 4, 5, 6
     const MATH_POOL = {
       2: ['1 + 1'],
       3: ['1 + 2', '2 + 1'],
@@ -549,6 +600,54 @@
       playTone(392, 'sine', 0.15);
     }
 
+    // TẠO TIẾNG VỖ TAY GIÒN GIÃ CHÂN THỰC BẰNG WEB AUDIO API (KHÔNG CẦN TẢI FILE NGOÀI)
+    function playApplauseSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      // 1. Nhạc chuông vui mừng chiến thắng
+      const fanfareNotes = [523.25, 659.25, 783.99, 1046.50, 880, 1046.50];
+      const fanfareTimes = [0, 0.14, 0.28, 0.45, 0.7, 0.95];
+      fanfareNotes.forEach((freq, idx) => {
+        setTimeout(() => playTone(freq, 'sine', 0.3), fanfareTimes[idx] * 1000);
+      });
+
+      // 2. Tạo âm vỗ tay tự nhiên từ dải nhiễu trắng lọc băng thông (Hand claps synthesis)
+      const bufferSize = Math.floor(audioCtx.sampleRate * 0.05); // 50ms cho 1 tiếng vỗ tay
+      const clapBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = clapBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        const decay = Math.exp(-i / (audioCtx.sampleRate * 0.009));
+        data[i] = (Math.random() * 2 - 1) * decay;
+      }
+
+      // Giả lập 85 tiếng vỗ tay dồn dập của cả lớp trong 3.5 giây
+      const totalClaps = 85;
+      for (let i = 0; i < totalClaps; i++) {
+        const delay = Math.pow(Math.random(), 0.75) * 3.3; // Mật độ dồn dập tự nhiên
+        setTimeout(() => {
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const source = audioCtx.createBufferSource();
+          source.buffer = clapBuffer;
+
+          // Bộ lọc băng thông giả lập âm sắc bàn tay vỗ vào nhau
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.value = 900 + Math.random() * 800; // 900Hz - 1700Hz
+          filter.Q.value = 2.0 + Math.random() * 1.5;
+
+          const gain = audioCtx.createGain();
+          const vol = 0.12 + Math.random() * 0.22;
+          gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+
+          source.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          source.start();
+        }, delay * 1000);
+      }
+    }
+
     // Sinh 9 câu hỏi ngẫu nhiên từ {2, 3, 4, 5, 6} (mỗi số tối đa 2 lần)
     function generateQuestions() {
       const targetPool = [2, 2, 3, 3, 4, 4, 5, 5, 6, 6];
@@ -562,26 +661,52 @@
       });
     }
 
-    // SVG quả táo 3D đỏ mọng
+    // SVG QUẢ TÁO ĐỎ CHÂN THỰC: CÓ VẾT LÕM CUỐNG, LÁ TÁO CÓ GÂN, VÂN ĐỎ BÓNG TỰ NHIÊN
     function createAppleSVG() {
       return `
-        <svg class="apple-svg" viewBox="0 0 100 110">
+        <svg class="apple-svg" viewBox="0 0 100 115">
           <defs>
-            <radialGradient id="appleGrad" cx="38%" cy="32%" r="65%">
-              <stop offset="0%" stop-color="#ff6b6b"/>
-              <stop offset="40%" stop-color="#ee2727"/>
-              <stop offset="100%" stop-color="#990000"/>
+            <!-- Gradient màu đỏ tươi chín mọng của quả táo thật -->
+            <radialGradient id="appleSkin" cx="42%" cy="36%" r="65%">
+              <stop offset="0%" stop-color="#ff5252"/>
+              <stop offset="40%" stop-color="#d32f2f"/>
+              <stop offset="85%" stop-color="#b71c1c"/>
+              <stop offset="100%" stop-color="#7f0000"/>
+            </radialGradient>
+            
+            <!-- Vết bóng vàng cam nhẹ quanh cuống -->
+            <radialGradient id="stemGlow" cx="50%" cy="30%" r="35%">
+              <stop offset="0%" stop-color="#ffb74d" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#d32f2f" stop-opacity="0"/>
             </radialGradient>
           </defs>
-          <!-- Cuống táo cong tự nhiên -->
-          <path d="M50 25 C50 12, 58 4, 63 2 C62 9, 57 18, 52 25 Z" fill="#4e342e"/>
-          <!-- Lá xanh bóng -->
-          <path d="M53 17 C68 10, 82 17, 88 8 C81 24, 68 28, 53 22 Z" fill="#66bb6a" stroke="#2e7d32" stroke-width="1.5"/>
-          <!-- Thân quả táo cong trái tim -->
-          <path d="M50 25 C30 25, 10 36, 10 63 C10 89, 32 105, 48 105 C50 105, 50 105, 52 105 C68 105, 90 89, 90 63 C90 36, 70 25, 50 25 Z"
-                fill="url(#appleGrad)"/>
-          <!-- Vệt sáng phản chiếu ánh nắng 3D -->
-          <ellipse cx="30" cy="46" rx="7" ry="13" transform="rotate(-26 30 46)" fill="rgba(255, 255, 255, 0.6)"/>
+
+          <!-- Cuống táo gỗ màu nâu uốn cong -->
+          <path d="M50 22 C49 10, 56 4, 62 2 C61 9, 56 16, 52 24 Z" fill="#4a2810"/>
+          
+          <!-- Chiếc lá táo thật thuôn nhọn có gân lá -->
+          <path d="M52 18 C66 11, 80 16, 88 7 C82 22, 68 26, 52 21 Z" fill="#43a047" stroke="#2e7d32" stroke-width="1.2"/>
+          <path d="M54 18 Q68 16 84 9" stroke="#a5d6a7" stroke-width="1.2" fill="none"/>
+          
+          <!-- HÌNH DÁNG QUẢ TÁO THẬT: CÓ VÙNG LÕM Ở CUỐNG VÀ ĐÁY HƠI THUÔN -->
+          <path d="M50 22 
+                   C38 22, 14 28, 11 54 
+                   C8 78, 26 98, 42 107 
+                   C47 110, 50 108, 52 108 
+                   C54 108, 57 110, 62 107 
+                   C78 98, 96 78, 93 54 
+                   C90 28, 66 22, 50 22 Z"
+                fill="url(#appleSkin)"/>
+          
+          <!-- Vệt sáng ửng vàng quanh cuống -->
+          <ellipse cx="50" cy="28" rx="18" ry="8" fill="url(#stemGlow)"/>
+          
+          <!-- Rãnh lõm sâu ở cuống táo -->
+          <path d="M44 23 C48 26, 54 26, 58 23 C55 24.5, 47 24.5, 44 23 Z" fill="#3e1b00" opacity="0.75"/>
+
+          <!-- Vệt ánh sáng phản chiếu 3D mềm mại trên thân quả táo -->
+          <path d="M25 42 C20 54, 21 70, 28 82" stroke="rgba(255, 255, 255, 0.45)" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <ellipse cx="32" cy="42" rx="5" ry="9" transform="rotate(-28 32 42)" fill="rgba(255, 255, 255, 0.65)"/>
         </svg>
       `;
     }
@@ -691,12 +816,15 @@
       }, 760);
     }
 
-    // Màn hình hoàn thành
+    // Màn hình hoàn thành kèm tiếng vỗ tay ròn rã!
     function showVictory() {
       document.getElementById('board-container').style.display = 'none';
       document.getElementById('orchard-wrapper').style.display = 'none';
       document.getElementById('summary-view').style.display = 'flex';
       document.getElementById('progress-text').innerText = 'Hoàn thành';
+      
+      // Kích hoạt tiếng vỗ tay nồng nhiệt
+      playApplauseSound();
       startConfetti();
     }
 
@@ -721,7 +849,7 @@
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      const pieces = Array.from({ length: 85 }, () => ({
+      const pieces = Array.from({ length: 90 }, () => ({
         x: Math.random() * canvas.width,
         y: -15,
         r: Math.random() * 8 + 4,
