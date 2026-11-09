@@ -169,11 +169,11 @@
       pointer-events: none;
     }
 
-    /* Quả táo thực tế trên cây */
+    /* Quả táo thực tế trên cây - kích thước thoáng đãng, không dày đặc */
     .apple-item {
       position: absolute;
-      width: clamp(52px, 6vw, 68px);
-      height: clamp(58px, 6.7vw, 76px);
+      width: clamp(46px, 5.2vw, 60px);
+      height: clamp(52px, 5.8vw, 66px);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -193,7 +193,7 @@
     }
     .apple-number {
       position: absolute;
-      font-size: clamp(21px, 2.4vw, 27px);
+      font-size: clamp(20px, 2.2vw, 25px);
       font-weight: 900;
       color: #ffffff;
       top: 57%;
@@ -266,61 +266,160 @@
       100% { transform: scale(1); }
     }
 
-    /* Màn hình tổng kết chúc mừng */
+    /* MÀN HÌNH TỔNG KẾT 2 CỘT: CÂY TÁO NHỎ & DANH SÁCH PHÉP TÍNH */
     #summary-view {
       display: none;
-      width: 90%;
-      max-width: 600px;
+      width: 95%;
+      max-width: 840px;
+      max-height: calc(100vh - 30px);
       background: rgba(255, 255, 255, 0.98);
-      border-radius: 26px;
-      padding: 24px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-      text-align: center;
+      border-radius: 24px;
+      padding: 14px 22px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.28);
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       margin: auto;
       z-index: 100;
       animation: popIn 0.5s ease;
     }
+    .summary-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      text-align: center;
+    }
     .summary-title {
-      font-size: 25px;
+      font-size: 22px;
       color: #2e7d32;
       font-weight: 900;
-    }
-    .summary-desc {
-      font-size: 16px;
-      color: #444;
-      font-weight: 700;
-      line-height: 1.5;
     }
     .applause-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: #fff8e1;
-      border: 2px solid #ffd54f;
+      border: 1.5px solid #ffd54f;
       color: #e65100;
       font-weight: 900;
+      font-size: 14px;
+      padding: 3px 14px;
+      border-radius: 20px;
+    }
+
+    /* Khung 2 cột: Cột trái (Cây táo nhỏ) - Cột phải (Danh sách phép tính) */
+    .summary-grid {
+      display: flex;
+      width: 100%;
+      gap: 16px;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .summary-left {
+      flex: 0.9;
+      max-width: 280px;
+      background: linear-gradient(180deg, #f1f8e9 0%, #dcedc8 100%);
+      border: 2px solid #a5d6a7;
+      border-radius: 20px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+    .mini-tree-svg {
+      width: 100%;
+      max-height: 145px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+    }
+    .mini-basket-info {
+      margin-top: 6px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #2e7d32;
+      background: #ffffff;
+      padding: 4px 12px;
+      border-radius: 14px;
+      border: 1.5px solid #81c784;
+    }
+
+    .summary-right {
+      flex: 1.4;
+      background: #fffde7;
+      border: 2px solid #fff59d;
+      border-radius: 20px;
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .list-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: #e65100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .math-list-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px 10px;
+    }
+    .math-item {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 4px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1.5px solid #e0e0e0;
+      font-weight: 800;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .item-idx {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .item-formula {
+      font-size: 16px;
+      color: #37474f;
+    }
+    .item-equal {
+      color: #9e9e9e;
+      font-size: 14px;
+    }
+    .item-ans {
+      color: #c62828;
       font-size: 17px;
-      padding: 6px 18px;
-      border-radius: 30px;
-      animation: pulseBadge 1.2s infinite;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 2px;
     }
-    @keyframes pulseBadge {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
-    }
+
     .btn-action {
-      padding: 13px 34px;
-      font-size: 19px;
+      padding: 10px 30px;
+      font-size: 18px;
       font-weight: 900;
       color: #ffffff;
       background: linear-gradient(180deg, #43a047, #2e7d32);
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(46, 125, 50, 0.35);
+      box-shadow: 0 5px 14px rgba(46, 125, 50, 0.35);
       transition: transform 0.15s;
     }
     .btn-action:hover { transform: scale(1.05); }
@@ -328,6 +427,7 @@
     @keyframes popIn {
       from { transform: scale(0.7); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
+    }
     }
 
     canvas#confetti { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999; }
@@ -517,43 +617,89 @@
     </div>
   </div>
 
-  <!-- Màn hình chiến thắng tổng kết kèm vỗ tay -->
+  <!-- MÀN HÌNH TỔNG KẾT: CỘT TRÁI CÂY TÁO NHỎ, CỘT PHẢI BẢNG PHÉP TÍNH -->
   <div id="summary-view">
-    <div style="font-size: 52px;">🎉 🏆 🍎</div>
-    <div class="summary-title">BÉ XUẤT SẮC QUÁ! ĐÃ HÁI ĐẦY GIỎ TÁO</div>
-    <div class="applause-badge">👏 👏 TIẾNG VỖ TAY KHEN THƯỞNG 👏 👏</div>
-    <div class="summary-desc">
-      Chúc mừng bé đã tính đúng toàn bộ <b>9 phép tính</b> và hái được <b>9 quả táo chín mọng</b> vào giỏ!
+    <div class="summary-header">
+      <div style="font-size: 34px;">🎉 🏆 🍎</div>
+      <div class="summary-title">XUẤT SẮC! EM ĐÃ HOÀN THÀNH BÀI TẬP</div>
+      <div class="applause-badge">👏 👏 TIẾNG VỖ TAY KHEN THƯỞNG 👏 👏</div>
     </div>
+
+    <div class="summary-grid">
+      <!-- Cột trái: Cây táo nhỏ và giỏ táo đầy ắp -->
+      <div class="summary-left">
+        <svg class="mini-tree-svg" viewBox="0 0 240 175">
+          <!-- Đồi cỏ nhỏ -->
+          <path d="M0 155 Q120 140 240 155 L240 175 L0 175 Z" fill="#81c784"/>
+          <!-- Thân cây mini -->
+          <path d="M108 165 C108 120 95 90 80 65 L95 60 C110 85 115 105 118 130 L122 130 C125 105 130 85 145 60 L160 65 C145 90 132 120 132 165 Z" fill="#6d4c41"/>
+          <!-- Tán lá xanh nhiều lớp -->
+          <circle cx="80" cy="70" r="42" fill="#2e7d32"/>
+          <circle cx="160" cy="70" r="42" fill="#2e7d32"/>
+          <circle cx="120" cy="48" r="45" fill="#388e3c"/>
+          <circle cx="85" cy="80" r="35" fill="#43a047"/>
+          <circle cx="155" cy="80" r="35" fill="#43a047"/>
+          <circle cx="120" cy="65" r="38" fill="#4caf50"/>
+          <!-- Vài quả táo đỏ mini trên cây -->
+          <circle cx="92" cy="65" r="6" fill="#e53935"/>
+          <circle cx="145" cy="60" r="6" fill="#e53935"/>
+          <circle cx="120" cy="45" r="6" fill="#e53935"/>
+          
+          <!-- Chiếc giỏ đựng đầy 9 quả táo đỏ mọng -->
+          <g transform="translate(142, 118) scale(0.7)">
+            <path d="M10 25 C10 0, 70 0, 70 25" fill="none" stroke="#5d3514" stroke-width="5"/>
+            <path d="M5 22 L15 56 C16 59 20 60 25 60 L55 60 C60 60 64 59 65 56 L75 22 Z" fill="#c68a4c" stroke="#4e342e" stroke-width="2.5"/>
+            <!-- Các quả táo đầy giỏ -->
+            <circle cx="22" cy="20" r="7.5" fill="#d32f2f"/>
+            <circle cx="40" cy="18" r="8" fill="#f44336"/>
+            <circle cx="58" cy="20" r="7.5" fill="#d32f2f"/>
+            <circle cx="31" cy="11" r="7.5" fill="#ff5252"/>
+            <circle cx="49" cy="11" r="7.5" fill="#e53935"/>
+          </g>
+        </svg>
+        <div class="mini-basket-info">🧺 Đã hái: <b>9 quả táo vào giỏ</b></div>
+      </div>
+
+      <!-- Cột phải: Danh sách phép tính và kết quả đã làm -->
+      <div class="summary-right">
+        <div class="list-title">📝 Bảng Phép Tính Đã Thực Hiện:</div>
+        <div class="math-list-grid" id="math-history-list"></div>
+      </div>
+    </div>
+
     <button class="btn-action" onclick="resetGame()">Luyện tập lại vòng mới</button>
   </div>
 
   <canvas id="confetti"></canvas>
 
   <script>
-    // Cấu hình 14 quả táo nằm hoàn toàn 100% bên trong tán lá xanh của cây:
+    // Cấu hình 14 quả táo phân bố thoáng đãng, không dày đặc, không rối mắt:
     // Số 1, 7, 8, 9: mỗi số 1 quả
     // Số 2, 3, 4, 5, 6: mỗi số 2 quả
     const APPLES_DATA = [
-      // Hàng trên (Upper canopy)
-      { id: 'a8',   number: 8, top: 25, left: 26 },
-      { id: 'a3_1', number: 3, top: 23, left: 37 },
-      { id: 'a4_2', number: 4, top: 21, left: 50 },
-      { id: 'a2_2', number: 2, top: 24, left: 63 },
-      { id: 'a7',   number: 7, top: 26, left: 72 },
+      // Nhánh trái (Left branch)
+      { id: 'a8',   number: 8, top: 25, left: 19 },
+      { id: 'a1',   number: 1, top: 39, left: 24 },
+      { id: 'a2_1', number: 2, top: 52, left: 28 },
       
-      // Hàng giữa (Mid canopy)
-      { id: 'a1',   number: 1, top: 34, left: 22 },
-      { id: 'a4_1', number: 4, top: 35, left: 33 },
-      { id: 'a6_1', number: 6, top: 32, left: 44 },
-      { id: 'a5_2', number: 5, top: 34, left: 56 },
-      { id: 'a3_2', number: 3, top: 36, left: 68 },
+      // Nhánh giữa - trái (Mid-left)
+      { id: 'a3_1', number: 3, top: 19, left: 35 },
+      { id: 'a4_1', number: 4, top: 35, left: 36 },
+      { id: 'a9',   number: 9, top: 49, left: 39 },
 
-      // Hàng dưới (Lower canopy)
-      { id: 'a2_1', number: 2, top: 45, left: 25 },
-      { id: 'a9',   number: 9, top: 47, left: 36 },
-      { id: 'a5_1', number: 5, top: 48, left: 47 },
-      { id: 'a6_2', number: 6, top: 46, left: 58 }
+      // Đỉnh vòm & trung tâm (Crown & Center)
+      { id: 'a4_2', number: 4, top: 15, left: 50 },
+      { id: 'a6_1', number: 6, top: 31, left: 49 },
+      { id: 'a5_1', number: 5, top: 47, left: 50 },
+
+      // Nhánh giữa - phải (Mid-right)
+      { id: 'a2_2', number: 2, top: 19, left: 65 },
+      { id: 'a5_2', number: 5, top: 35, left: 63 },
+      { id: 'a6_2', number: 6, top: 49, left: 61 },
+
+      // Nhánh phải (Right branch)
+      { id: 'a7',   number: 7, top: 26, left: 79 },
+      { id: 'a3_2', number: 3, top: 42, left: 75 }
     ];
 
     // Kho phép tính cộng trong phạm vi 6 cho kết quả 2, 3, 4, 5, 6
@@ -816,13 +962,28 @@
       }, 760);
     }
 
-    // Màn hình hoàn thành kèm tiếng vỗ tay ròn rã!
+    // Màn hình hoàn thành kèm tiếng vỗ tay ròn rã và hiển thị bảng phép tính!
     function showVictory() {
       document.getElementById('board-container').style.display = 'none';
       document.getElementById('orchard-wrapper').style.display = 'none';
       document.getElementById('summary-view').style.display = 'flex';
       document.getElementById('progress-text').innerText = 'Hoàn thành';
       
+      // Hiển thị danh sách 9 phép tính và kết quả đã làm vào cột bên phải
+      const historyList = document.getElementById('math-history-list');
+      historyList.innerHTML = '';
+      questionsList.forEach((q, idx) => {
+        const item = document.createElement('div');
+        item.className = 'math-item';
+        item.innerHTML = `
+          <span class="item-idx">${idx + 1}</span>
+          <span class="item-formula">${q.formula}</span>
+          <span class="item-equal">=</span>
+          <span class="item-ans">🍎 ${q.answer}</span>
+        `;
+        historyList.appendChild(item);
+      });
+
       // Kích hoạt tiếng vỗ tay nồng nhiệt
       playApplauseSound();
       startConfetti();
