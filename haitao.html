@@ -404,7 +404,8 @@
     .scaled-tree-svg {
       width: 100%;
       height: 100%;
-      max-height: 180px;
+      min-height: 190px;
+      max-height: 225px;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
     }
     .mini-basket-info {
@@ -442,6 +443,65 @@
   </style>
 </head>
 <body>
+
+  <!-- GLOBAL SVG DEFS (TỒN TẠI XUYÊN SUỐT TRANG, KHÔNG BỊ MẤT KHI ẨN CONTAINER) -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <!-- Gradient thân cây gỗ cổ thụ thực tế -->
+      <linearGradient id="trunkBark" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#3d2211"/>
+        <stop offset="25%" stop-color="#5a341b"/>
+        <stop offset="55%" stop-color="#734323"/>
+        <stop offset="80%" stop-color="#5a341b"/>
+        <stop offset="100%" stop-color="#331c0e"/>
+      </linearGradient>
+
+      <!-- Vỏ cành phụ -->
+      <linearGradient id="branchBark" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#6e3e1d"/>
+        <stop offset="100%" stop-color="#422410"/>
+      </linearGradient>
+
+      <!-- Tán lá tối (Lớp chiều sâu bên trong) -->
+      <radialGradient id="foliageDeep" cx="45%" cy="40%" r="65%">
+        <stop offset="0%" stop-color="#1f5424"/>
+        <stop offset="70%" stop-color="#133d16"/>
+        <stop offset="100%" stop-color="#0b240e"/>
+      </radialGradient>
+
+      <!-- Tán lá chính (Màu xanh lá tự nhiên) -->
+      <radialGradient id="foliageMid" cx="40%" cy="30%" r="65%">
+        <stop offset="0%" stop-color="#3e9444"/>
+        <stop offset="65%" stop-color="#2a722e"/>
+        <stop offset="100%" stop-color="#184e1c"/>
+      </radialGradient>
+
+      <!-- Tán lá sáng (Đón ánh sáng mặt trời) -->
+      <radialGradient id="foliageSun" cx="38%" cy="25%" r="65%">
+        <stop offset="0%" stop-color="#76ba4e"/>
+        <stop offset="55%" stop-color="#479e39"/>
+        <stop offset="100%" stop-color="#246d23"/>
+      </radialGradient>
+
+      <!-- Thảm cỏ nền -->
+      <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#6ea838"/>
+        <stop offset="100%" stop-color="#4c7e22"/>
+      </linearGradient>
+
+      <!-- Gradient giỏ mây -->
+      <linearGradient id="basketWood" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#c68a4c"/>
+        <stop offset="50%" stop-color="#9e6229"/>
+        <stop offset="100%" stop-color="#6d3d12"/>
+      </linearGradient>
+      <linearGradient id="rimWood" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#8d5422"/>
+        <stop offset="50%" stop-color="#d49b5d"/>
+        <stop offset="100%" stop-color="#734116"/>
+      </linearGradient>
+    </defs>
+  </svg>
 
   <!-- Mặt trời & Mây -->
   <div class="sun"></div>
@@ -656,31 +716,78 @@
           <ellipse cx="500" cy="565" rx="340" ry="22" fill="rgba(0, 0, 0, 0.18)"/>
           <path d="M0 550 Q250 515 500 538 T1000 545 L1000 600 L0 600 Z" fill="url(#groundGrad)"/>
           
-          <!-- Gốc cây & Thân cành giống trò chơi -->
+          <!-- Búi cỏ & Hoa dại -->
+          <path d="M410 560 L418 535 L425 560 L435 530 L442 562 Z" fill="#588e2b"/>
+          <path d="M560 562 L568 532 L575 560 L585 536 L592 560 Z" fill="#588e2b"/>
+          <circle cx="215" cy="554" r="5" fill="#ffffff"/>
+          <circle cx="215" cy="554" r="2.5" fill="#fbc02d"/>
+
+          <!-- Gốc cây & Rễ to cắm xuống đất -->
           <path d="M430 575 C442 545 455 510 468 430 L532 430 C545 510 558 545 575 575 C550 568 530 552 500 556 C470 552 450 568 430 575 Z" fill="url(#trunkBark)"/>
+          <path d="M435 572 C415 574 395 578 375 585 C400 578 425 565 445 550 Z" fill="#3d2211"/>
+          <path d="M570 572 C590 574 610 578 630 585 C605 578 580 565 560 550 Z" fill="#3d2211"/>
+
+          <!-- Thân cây cổ thụ & Chánh cành -->
           <path d="M468 430 C462 355 435 295 365 220 L405 205 C458 268 482 312 488 360 L512 360 C518 312 542 268 595 205 L635 220 C565 295 538 355 532 430 Z" fill="url(#trunkBark)"/>
+          <path d="M485 530 Q475 440 488 370" stroke="#331c0e" stroke-width="3" fill="none" opacity="0.65"/>
+          <path d="M515 530 Q525 440 512 370" stroke="#331c0e" stroke-width="3" fill="none" opacity="0.65"/>
+          
           <path d="M440 280 C385 245 320 250 255 268 L260 248 C325 230 388 225 450 260 Z" fill="url(#branchBark)"/>
+          <path d="M340 238 C310 195 270 180 230 175 L235 160 C280 165 322 182 355 228 Z" fill="url(#branchBark)"/>
           <path d="M560 280 C615 245 680 250 745 268 L740 248 C675 230 612 225 550 260 Z" fill="url(#branchBark)"/>
+          <path d="M660 238 C690 195 730 180 770 175 L765 160 C720 165 678 182 645 228 Z" fill="url(#branchBark)"/>
           <path d="M492 310 L496 110 C496 105 504 105 504 110 L508 310 Z" fill="url(#branchBark)"/>
 
-          <!-- Sử dụng chính tán lá trò chơi -->
-          <use href="#tree-foliage-group"/>
+          <!-- Tán lá cây của trò chơi: Lớp 1 (Sâu) -->
+          <path d="M100 230 C75 150 120 80 200 60 C240 48 285 55 320 30 C370 8 435 8 485 18 C535 8 600 8 650 30 C685 55 730 48 770 60 C850 80 895 150 870 230 C905 285 870 350 805 345 C760 380 680 375 630 340 C580 375 420 375 370 340 C320 375 240 380 195 345 C130 350 95 285 100 230 Z" fill="url(#foliageDeep)"/>
+
+          <!-- Lớp 2 (Giữa): Khối lá dày bồng bềnh -->
+          <ellipse cx="230" cy="185" rx="120" ry="110" fill="url(#foliageMid)"/>
+          <ellipse cx="770" cy="185" rx="120" ry="110" fill="url(#foliageMid)"/>
+          <ellipse cx="370" cy="145" rx="115" ry="105" fill="url(#foliageMid)"/>
+          <ellipse cx="630" cy="145" rx="115" ry="105" fill="url(#foliageMid)"/>
+          <ellipse cx="500" cy="120" rx="125" ry="105" fill="url(#foliageMid)"/>
+          <ellipse cx="280" cy="285" rx="110" ry="85" fill="url(#foliageMid)"/>
+          <ellipse cx="500" cy="275" rx="140" ry="85" fill="url(#foliageMid)"/>
+          <ellipse cx="720" cy="285" rx="110" ry="85" fill="url(#foliageMid)"/>
+
+          <!-- Lớp 3 (Đón nắng): Ánh sáng mặt trời -->
+          <ellipse cx="225" cy="160" rx="95" ry="85" fill="url(#foliageSun)"/>
+          <ellipse cx="365" cy="120" rx="90" ry="80" fill="url(#foliageSun)"/>
+          <ellipse cx="500" cy="95" rx="100" ry="80" fill="url(#foliageSun)"/>
+          <ellipse cx="635" cy="120" rx="90" ry="80" fill="url(#foliageSun)"/>
+          <ellipse cx="775" cy="160" rx="95" ry="85" fill="url(#foliageSun)"/>
+          <ellipse cx="440" cy="210" rx="80" ry="65" fill="url(#foliageSun)"/>
+          <ellipse cx="560" cy="210" rx="80" ry="65" fill="url(#foliageSun)"/>
+
+          <!-- Vài quả táo đỏ còn trên cành cây -->
+          <circle cx="280" cy="180" r="16" fill="#d32f2f"/>
+          <circle cx="276" cy="176" r="4" fill="#ffffff" opacity="0.6"/>
+          <circle cx="720" cy="190" r="16" fill="#d32f2f"/>
+          <circle cx="716" cy="186" r="4" fill="#ffffff" opacity="0.6"/>
+          <circle cx="500" cy="140" r="17" fill="#d32f2f"/>
+          <circle cx="496" cy="136" r="4.5" fill="#ffffff" opacity="0.6"/>
 
           <!-- Giỏ đựng đầy 9 quả táo đỏ mọng bên gốc cây -->
-          <g transform="translate(680, 480) scale(1.15)">
+          <g transform="translate(630, 420) scale(1.35)">
+            <!-- Quai giỏ mây -->
             <path d="M22 45 C22 2, 118 2, 118 45" fill="none" stroke="#5d3514" stroke-width="7" stroke-linecap="round"/>
+            <path d="M24 45 C24 5, 116 5, 116 45" fill="none" stroke="#d7a164" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Thân giỏ -->
             <path d="M12 40 L26 92 C28 97 34 99 40 99 L100 99 C106 99 112 97 114 92 L128 40 Z" fill="url(#basketWood)" stroke="#3e2009" stroke-width="3"/>
-            <!-- Các quả táo trong giỏ -->
-            <circle cx="38" cy="36" r="14" fill="#d32f2f"/>
-            <circle cx="68" cy="34" r="15" fill="#f44336"/>
-            <circle cx="98" cy="36" r="14" fill="#d32f2f"/>
-            <circle cx="50" cy="22" r="14" fill="#e53935"/>
-            <circle cx="82" cy="22" r="14" fill="#f44336"/>
-            <circle cx="66" cy="12" r="13" fill="#ff5252"/>
-            <circle cx="34" cy="22" r="12" fill="#d32f2f"/>
-            <circle cx="102" cy="22" r="12" fill="#e53935"/>
-            <circle cx="66" cy="28" r="13" fill="#c62828"/>
-            <ellipse cx="70" cy="40" rx="60" ry="11" fill="none" stroke="#3e2009" stroke-width="3"/>
+            <path d="M25 45 L105 95 M45 42 L112 85 M15 65 L65 98 M115 45 L35 95 M95 42 L28 85 M125 65 L75 98" stroke="rgba(55,25,5,0.65)" stroke-width="2.2"/>
+            <!-- Vành miệng giỏ -->
+            <ellipse cx="70" cy="40" rx="60" ry="11" fill="url(#rimWood)" stroke="#3e2009" stroke-width="3"/>
+            <!-- 9 quả táo đỏ mọng đầy ắp giỏ -->
+            <circle cx="38" cy="34" r="13" fill="#d32f2f"/>
+            <circle cx="68" cy="32" r="14" fill="#f44336"/>
+            <circle cx="98" cy="34" r="13" fill="#d32f2f"/>
+            <circle cx="50" cy="20" r="13" fill="#e53935"/>
+            <circle cx="82" cy="20" r="14" fill="#f44336"/>
+            <circle cx="66" cy="10" r="12" fill="#ff5252"/>
+            <circle cx="34" cy="20" r="12" fill="#d32f2f"/>
+            <circle cx="102" cy="20" r="12" fill="#e53935"/>
+            <circle cx="66" cy="24" r="12" fill="#c62828"/>
           </g>
         </svg>
         <div class="mini-basket-info">🧺 Đã hái: <b>9 quả táo vào giỏ</b></div>
@@ -996,10 +1103,9 @@
         const item = document.createElement('div');
         item.className = 'math-item';
         item.innerHTML = `
-          <span class="item-idx">${idx + 1}</span>
           <span class="item-formula">${q.formula}</span>
           <span class="item-equal">=</span>
-          <span class="item-ans">🍎 ${q.answer}</span>
+          <span class="item-ans"> ${q.answer}</span>
         `;
         historyList.appendChild(item);
       });
